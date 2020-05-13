@@ -19,11 +19,9 @@ String Object
 
 string 的 length 是不可写不可配的。
 
-Arguments Object
-[[callee]] 视为函数参数对对象，伪数组 caller
+Arguments Object [[callee]] 视为函数参数对对象，伪数组 caller
 
-Object
-[[Get]] property 被访问时调用 get
+Object [[Get]] property 被访问时调用 get
 
 [[Set]] property 被赋值时调用 set
 
@@ -95,6 +93,7 @@ left-hand side & right-hand side
 表示等号左边和等号右边
 
 - Update
+
   - a ++
   - a --
   - -- a
@@ -120,25 +119,21 @@ undefined
 IIFE
 
 ```javascript
-void function(i) {
-
-}(i)
+void (function (i) {})(i)
 // 比直接使用括号好，避免忘记写分号的情况
 ```
 
 - Exponetal
-  - **
+  - \*\*
 
-
-- Multiplicative
+* Multiplicative
   - `* / %`
-- Additive
+* Additive
   - `+ -`
-- Shift
+* Shift
   - << >> >>>
-- Relationship
+* Relationship
   - < > <= >= instanceof in
-
 
 - Logical
   - &&
@@ -146,28 +141,27 @@ void function(i) {
 - Conditional
   - ? :
 
-
-- Equality
+* Equality
   - ==
   - !=
   - ===
   - !==
-- Bitwise
+* Bitwise
   - & ^ |
 
-
 ```javascript
-1 + {
-  [Symbol.toPrimitive]() {
-    return 6
-  },
-  valueOf() {
-    return 1
-  },
-  toString() {
-    return "2"
+1 +
+  {
+    [Symbol.toPrimitive]() {
+      return 6
+    },
+    valueOf() {
+      return 1
+    },
+    toString() {
+      return '2'
+    },
   }
-}
 ```
 
 ## 重学 JavaScript | 语句，对象
@@ -191,11 +185,11 @@ void function(i) {
 #### 简单语句
 
 - ExpressionStatement `a = 1 + 2;`
-- EmptyStatement  `;`
+- EmptyStatement `;`
 - DebuggerStatement `debugger;`
-- ThrowStatement  `throw a;`
+- ThrowStatement `throw a;`
 - ContinueStatement `continue label1;`
-- BreakStatement  `break label2;`
+- BreakStatement `break label2;`
 - ReturnStatement `return 1 + 2;`
 
 #### 复合语句
@@ -218,10 +212,10 @@ void function(i) {
 ```
 
 ```javascript
-function *g() {
-  yield 0;
-  yield 1;
-  yield 4;
+function* g() {
+  yield 0
+  yield 1
+  yield 4
 }
 
 for (let p of g()) {
@@ -260,54 +254,54 @@ function foo() {
 
 ```javascript
 function sleep(d) {
-  return new Promise(resolve => setTimeout(resolve, d));
+  return new Promise((resolve) => setTimeout(resolve, d))
 }
 
 async function* foo() {
-  var i = 0;
+  var i = 0
   while (true) {
-    yield i++;
-    await sleep(1000);
+    yield i++
+    await sleep(1000)
   }
 }
 
-void async function() {
-  var g = foo();
+void (async function () {
+  var g = foo()
   for await (let e of g) {
-    console.log(e);
+    console.log(e)
   }
-}();
+})()
 ```
 
 ```javascript
-var x = 0;
+var x = 0
 function g() {
-  var o = {x: 1};
-  x = 2;
-  with(o) {
-    var x = 3;
+  var o = { x: 1 }
+  x = 2
+  with (o) {
+    var x = 3
   }
-  console.log(x);
+  console.log(x)
 }
 
 foo()
-console.log(x);
+console.log(x)
 ```
 
 ```javascript
-var x = 0;
+var x = 0
 function g() {
-  var o = {x: 1};
-  x = 2;
-  with(o) {
+  var o = { x: 1 }
+  x = 2
+  with (o) {
     // 作用域设计错误
-    x = 3;
+    x = 3
   }
-  console.log(x);
+  console.log(x)
 }
 
 foo()
-console.log(x);
+console.log(x)
 ```
 
 1. 有 `var` 不应该写在任何子结构里面，应该只写在函数最前面
@@ -361,7 +355,8 @@ JavaScript 用属性来统一抽象对象状态和行为。
 
 数据属性中如果存储函数，也可以用于描述行为。
 
-当我们访问属性时，如果当前对象没有，则会沿着原型找原型对象是否有此名称的属性，而原型对象还可能有原型，因此，会有“原型链”这一说法。
+当我们访问属性时，如果当前对象没有，则会沿着原型找原型对象是否有此名称的属性，而
+原型对象还可能有原型，因此，会有“原型链”这一说法。
 
 这以算法保证了，每个对象只需要描述自己和原型的区别即可。
 
@@ -384,7 +379,8 @@ JavaScript 用属性来统一抽象对象状态和行为。
 
 除了一般对象的属性和原型，函数对象还有一个行为`[[call]]`。
 
-我们用 JavaScript 中的 function 关键字、箭头运算符或者 Function 构造器创建对象，会有 `[[call]]` 这个行为
+我们用 JavaScript 中的 function 关键字、箭头运算符或者 Function 构造器创建对象，
+会有 `[[call]]` 这个行为
 
 我们用类似 `f()` 这样的语法把对象当作函数调用时，会访问到 `[[call]]`这个行为。
 
@@ -397,8 +393,9 @@ JavaScript 用属性来统一抽象对象状态和行为。
 
 ```javascript
 // 作业
-'美'.codePointAt(0).toString(2)
+'美'
+  .codePointAt(0)
+  .toString(2)
 
-[0b1110111, 0b10111110, 0b10001110].map(e => e.toString(16))
+  [(0b1110111, 0b10111110, 0b10001110)].map((e) => e.toString(16))
 ```
-
